@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script while loop for displaying different messages based on the loop iteration number
+
+cptr=1
+while [ $cptr -le 10 ]; do
+    if [ $cptr -eq 4 ]; then
+        echo "bad luck"
+    elif [ $cptr -eq 8 ]; then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+    cptr=$((cptr + 1))
+done
