@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script use while loop displaying the content of the file /etc/passwd, extracting the username, user ID, and home directory path
 
-psswd = "/etc/passwd"
+psswd="/etc/passwd"
 while IFS=':' read -r username _ uid _ _ home _; do
     echo "$username:$uid:$home"
 done < "$psswd"
