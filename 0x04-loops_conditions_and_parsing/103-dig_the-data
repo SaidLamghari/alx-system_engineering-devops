@@ -4,4 +4,4 @@
 # displays it in the specified format.
 
 
-awk '{count[$1" "$9]++} END {for (ip_http in count) print count[ip_http], ip_http}' apache-access.log | sort -rn -k1
+awk '{ print $1 " " $9 }' apache-access.log | sort | uniq -c | sort -rn
