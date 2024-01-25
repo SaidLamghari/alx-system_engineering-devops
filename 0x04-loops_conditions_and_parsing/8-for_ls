@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script use for loop for displaying the content of the current directory in a list format, showing only the part of the name after the first dash
+
+for fle in *; do
+    if [ -f "$fle" ] && [ "${fle:0:1}" != "." ]; then
+        name="${fle#*-}"
+        echo "$name"
+    fi
+done
