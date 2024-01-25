@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # This script use while loop tells a story based on the content of the /etc/passwd file
 
-
 psswd="/etc/passwd"
 while IFS=':' read -r username _ uid gid info home shell; do
     gang=$(grep -E "^([^:]*:)*${gid}:" /etc/group | cut -d ':' -f 1)
