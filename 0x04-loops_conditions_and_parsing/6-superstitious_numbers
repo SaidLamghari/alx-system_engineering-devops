@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script use while loop for displaying numbers from 1 to 20 and different messages based on specific iterations
+
+cptr=1
+while [ $cptr -le 20 ]; do
+    case $cptr in
+        4)
+            echo $cptr
+            echo "bad luck from China"
+            ;;
+        9)
+            echo $cptr
+            echo "bad luck from Japan"
+            ;;
+        17)
+            echo $cptr
+            echo "bad luck from Italy"
+            ;;
+        *)
+            echo $cptr
+            ;;
+    esac
+    cptr=$((cptr + 1))
+done
