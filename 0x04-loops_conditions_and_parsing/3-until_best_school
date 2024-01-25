@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script use until loop for displaying "Best School" 10 times
+
+cptr=0
+until [ $cptr -eq 10 ]; do
+    echo "Best School"
+    cptr=$((cptr + 1))
+done
