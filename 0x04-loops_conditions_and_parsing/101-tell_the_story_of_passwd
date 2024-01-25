@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script use while loop tells a story based on the content of the /etc/passwd file
+
+psswd="/etc/passwd"
+
+while IFS=':' read -r username _ uid gid info home shell; do
+    gang=$(grep -E "^([^:]*:)*${gid}:" /etc/group | cut -d ':' -f 1)
+    echo "The user $username is part of the $gid gang, lives in $home and rides $shell. $uid's place is protected by the passcode x, more info about the user here: $info"
+done < "$psswd"
