@@ -2,7 +2,7 @@
 # Function handle SIGTERM signal
 # Register SIGTERM signal handler
 
-trap 'I am invincible!!!' SIGTERM
+trap 'echo "I am invincible!!!"' SIGTERM
 while true; do
     echo "To infinity and beyond"
     sleep 2
