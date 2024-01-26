@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Function handle SIGTERM signal
 handle_sigterm() {
     echo "I am invincible!!!"
