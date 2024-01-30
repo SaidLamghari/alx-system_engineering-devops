@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#Simply matching School
+# Simply matching School
 
 in_put = ARGV[0]
 
