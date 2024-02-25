@@ -49,7 +49,7 @@ Design a one server web infrastructure that hosts the website that is reachable 
 * An A record is a type of DNS record that maps a domain name to an IPv4 address.
 * For example, the A record for www.foobar.com would be 8.8.8.8.
 
-### **Single Point of Failure:**
+### **Single Point of Failure (SPOF):**
 
 * A single point of failure is a component in a system that, if it fails, will cause the entire system to fail.
 * In the diagram, the server is a single point of failure because there is no redundancy. If the server fails, the website will be unavailable.
