@@ -1,7 +1,7 @@
 # 0x09. Web infrastructure design
 **Tasks**
 ## 0. Simple web stack
-**Design a one server web infrastructure that hosts the website that is reachable via www.foobar.com**\
+-**Design a one server web infrastructure that hosts the website that is reachable via www.foobar.com**
 ***Used:***
 * 1 server
 * 1 web server (Nginx)
