@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Script: 0-use_a_private_key
+# Description: This script establishes an SSH connection 
+# to a server using a private key and specified username.
+# Requirements:
+#   - The private key file must exist at ~/.ssh/school
+#   - The username for SSH connection is ubuntu
+#   - Only uses ssh single-character flags
+#   - Does not handle the case of a private key protected by a passphrase
+
+# Autor : Said LAMGHARI
+
+ssh -i ~/.ssh/school ubuntu@8.8.8.8
