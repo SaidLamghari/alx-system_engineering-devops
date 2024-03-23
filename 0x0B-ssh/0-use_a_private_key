@@ -11,4 +11,4 @@
 
 # Autor : Said LAMGHARI
 
-ssh -i ~/.ssh/school ubuntu@8.8.8.8
+ssh -i ~/.ssh/school ubuntu@34.207.253.244
