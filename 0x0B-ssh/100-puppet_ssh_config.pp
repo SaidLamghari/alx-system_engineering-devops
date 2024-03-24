@@ -4,12 +4,7 @@
 
 # TurnOff Pword authent. in SSH client config.
 
-file { 'Turn off passwd auth':
-  path => '/etc/ssh/sshd_config',
-  line => 'PasswordAuthentication no',
-}
-
-file { 'Declare identity file':
-  path => '/etc/ssh/ssh_config',
-  line => 'IdentityFile ~/.ssh/school',
+file { '/etc/ssh/ssh_config':
+  ensure  => 'file',
+  content => "PasswordAuthentication no\nIdentityFile ~/.ssh/school\n",
 }
