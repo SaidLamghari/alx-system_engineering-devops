@@ -1,0 +1,8 @@
+######################################################################
+# SSH Client Configuration
+# Autor: Said LAMGHARI
+
+# Host-specific Configuration
+Host your-server-ip
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
