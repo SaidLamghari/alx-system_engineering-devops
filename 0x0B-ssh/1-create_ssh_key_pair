@@ -9,11 +9,4 @@
 #   - The key will be protected by the passphrase 'betty'
 # Autor : SAID LAMGHARI
 
-# Generate RSAkeypair
-ssh-keygen -t rsa -b 4096 -C "Generated key for school" -f ~/.ssh/school
-
-# Provide passphrase 'betty'
-echo "betty" | ssh-keygen -p -P "" -N ""
-
-# Output smessage
-echo "RSA key pair created successfully."
+ssh-keygen -t rsa -b 4096 -f school -N betty
