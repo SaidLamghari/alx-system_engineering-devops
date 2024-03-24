@@ -6,5 +6,9 @@
 
 file { '/etc/ssh/ssh_config':
   ensure  => 'file',
-  content => "PasswordAuthentication no\nIdentityFile ~/.ssh/school\n",
+  content => "
+    # config. SSH
+    PasswordAuthentication
+    no\nIdentityFile ~/.ssh/school\n
+    ",
 }
