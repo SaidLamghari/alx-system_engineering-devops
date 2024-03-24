@@ -11,4 +11,7 @@
 
 # Autor : Said LAMGHARI
 
-ssh ubuntu@34.207.253.244 -i ~/.ssh/school
+ssh -i "$HOME/.ssh/school" -o "StrictHostKeyChecking=no" ubuntu@18.210.19.187
+
+# Exit script
+exit 0
