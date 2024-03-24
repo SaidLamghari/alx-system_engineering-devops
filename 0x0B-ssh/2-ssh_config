@@ -3,6 +3,6 @@
 # Autor: Said LAMGHARI
 
 # Host-specific Configuration
-Host your-server-ip
+Host *
     IdentityFile ~/.ssh/school
     PasswordAuthentication no
