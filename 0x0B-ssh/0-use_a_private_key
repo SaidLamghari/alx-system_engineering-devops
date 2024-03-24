@@ -11,6 +11,4 @@
 
 # Autor : Said LAMGHARI
 
-result=$(ssh -o "StrictHostKeyChecking=no" -o "BatchMode=yes" -i ~/.ssh/school ubuntu@54.174.242.40 echo "Connection successful!")
-
-echo "$result"
+ssh -i ~/.ssh/school ubuntu@54.174.242.40
