@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Web servers are the piece of software
+# generating and serving HTML pages
+# let’s install one
+
+# Autor: Said LAMGHARI
+
+apt-get update
+apt-get -y install nginx
+
+echo "Hello World!" | tee /var/www/html/index.html
+
+ufw allow 'Nginx HTTP'
+
+sed -i 's/^\(\s*listen \[::\]:80\s*\)#/\1/' /etc/nginx/sites-available/default
+
+service nginx restartV
