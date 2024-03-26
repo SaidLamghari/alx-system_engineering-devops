@@ -5,14 +5,18 @@
 
 # Autor: Said LAMGHARI
 
-sudo apt-get -y update
+# Update the package list
+sudo apt-get update
 
-sudo apt-get -y install nginx
+# Install Nginx
+sudo apt-get install -y nginx
 
-sudo ufw allow 'Nginx HTTP'
+# Configure Nginx to listen on port 80
+sudo sed -i 's/ listen 80;/ listen 80 default_server;/' /etc/nginx/sites-available/default
 
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+# Restart Nginx
+sudo /etc/init.d/nginx restart
 
-sudo service nginx start
-
+# Create an index.html file with the content "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html
 # end
