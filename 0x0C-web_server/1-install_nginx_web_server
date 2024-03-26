@@ -12,6 +12,4 @@ sudo ufw allow 'Nginx HTTP'
 
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo sed -i 's/^\(\s*listen \[::\]:80\s*\)#/\1/' /etc/nginx/sites-available/default
-
 sudo service nginx restart
