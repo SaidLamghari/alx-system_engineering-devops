@@ -5,13 +5,15 @@
 
 # Autor: Said LAMGHARI
 
+#!/bin/bash
+
 sudo apt-get update
 sudo apt-get -y install nginx
 
-sudo 'echo "Hello World!" | tee /var/www/html/index.html'
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo fw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 
 sudo sed -i 's/^\(\s*listen \[::\]:80\s*\)#/\1/' /etc/nginx/sites-available/default
 
-sudo service nginx restartV
+sudo service nginx restart
