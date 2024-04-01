@@ -1,12 +1,4 @@
-# For task #0,
-# Automate the task
-# creating a HTTP header response
-# Puppet.
-# 2-puppet_custom_http_response_header.pp
-
 # Autor: Said LAMGHARI
-
-# Install the Nginx
 package { 'nginx':
   ensure => installed,
 }
