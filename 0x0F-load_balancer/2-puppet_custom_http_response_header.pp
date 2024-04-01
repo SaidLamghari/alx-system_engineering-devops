@@ -6,31 +6,21 @@
 
 # Autor: Said LAMGHARI
 
-# Install Nginx package
+# Install the Nginx
 package { 'nginx':
   ensure => installed,
 }
 
-# Define header
-$hostname = $::fqdn
-
-# Configure Nginx and add header
-file { '/etc/nginx/sites-available/default':
-  ensure => present,
-  mode => '0644',
-  content => template('nginx/custom_header.erb'),
-}
-
-# Reload Nginx and  apply change
-exec { 'nginx_reload':
-  command => '/usr/sbin/service nginx reload',
-  refreshonly => true,
+# Configure HTTP response header
+file { '/etc/nginx/conf.d/custom_header.conf':
+  ensure  => present,
+  content => "server_tokens off;\nadd_header X-Served-By $::hostname;",
+  require => Package['nginx'],
+  notify  => Service['nginx'],
 }
 
 # Restart
 service { 'nginx':
   ensure => running,
   enable => true,
-  require => [File['/etc/nginx/sites-available/default'], Exec['nginx_reload']],
 }
-
