@@ -11,13 +11,6 @@ package { 'nginx':
   ensure => installed,
 }
 
-# Configure theNginx andlisten on port 80
-file { '/etc/nginx/sites-available/default':
-  ensure => present,
-  replace => true,
-  source => 'puppet:///modules/nginx/default',
-}
-
 # Define header
 $hostname = $::fqdn
 
