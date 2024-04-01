@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# install HAproxy on your lb-01 server.
+# configure HAproxy on your lb-01 server.
+
+# Autor: Said LAMGHARI
+
+# Install HAproxy
+sudo apt update
+sudo apt install -y haproxy
+
+# Configure HAproxy
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOF
+frontend http_front
+    bind *:80
+    mode http
+    default_backend http_back
+
+backend http_back
+    mode http
+    balance roundrobin
+    server web-01 topenergies.tech:80 check
+    server web-02 topenergies.tech:80 check
+EOF
+
+# Enable HAproxy init script
+sudo sed -i 's/ENABLED=.*/ENABLED=1/' /etc/default/haproxy
+
+# Restart HAproxy
+sudo service haproxy restart
