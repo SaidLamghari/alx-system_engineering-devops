@@ -18,13 +18,11 @@ file { '/etc/nginx/sites-available/default':
   source => 'puppet:///modules/nginx/default',
 }
 
-
 # Create HTML file
 file { '/var/www/html/index.html':
   ensure => present,
   content => 'Hello World!',
 }
-
 
 # Configure Redir.
 file { '/etc/nginx/sites-available/default':
@@ -33,13 +31,11 @@ file { '/etc/nginx/sites-available/default':
   content => template('nginx/custom_redirect.erb'),
 }
 
-
 # Create 404 HTML file
 file { '/var/www/html/404.html':
   ensure => present,
   content => "Ceci n'est pas une page",
 }
-
 
 # Configure Nginx to use 404 page
 file { '/etc/nginx/sites-available/default':
@@ -48,10 +44,8 @@ file { '/etc/nginx/sites-available/default':
   content => template('nginx/custom_404.erb'),
 }
 
-
 # Define header
 $hostname = $::fqdn
-
 
 # Configure Nginx and add header
 file { '/etc/nginx/sites-available/default':
@@ -60,13 +54,11 @@ file { '/etc/nginx/sites-available/default':
   content => template('nginx/custom_header.erb'),
 }
 
-
 # Reload Nginx and  apply change
 exec { 'nginx_reload':
   command => '/usr/sbin/service nginx reload',
   refreshonly => true,
 }
-
 
 # Restart
 service { 'nginx':
