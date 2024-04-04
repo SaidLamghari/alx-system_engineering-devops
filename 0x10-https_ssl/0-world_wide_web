@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Autor : SAID LAMGHARI
 
+function lookup_subdomain() {
+    dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
+}
+
 if [ -z "$1" ]; then
     echo "Usage: $0 domain [subdomain]"
     exit 1
@@ -13,7 +17,3 @@ if [ -z "$2" ]; then
 else
     lookup_subdomain "$2" "$1"
 fi
-
-function lookup_subdomain() {
-    dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
-}
