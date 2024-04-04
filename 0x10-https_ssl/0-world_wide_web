@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
+# Autor : SAID LAMGHARI
 
-grxrdinfo() {
-  domaine="$1"
-  sous_domaine="$2"
+if [ -z "$1" ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+if [ -z "$2" ]; then
+    lookup_subdomain www "$1"
+    lookup_subdomain lb-01 "$1"
+    lookup_subdomain web-01 "$1"
+    lookup_subdomain web-02 "$1"
+else
+    lookup_subdomain "$2" "$1"
+fi
 
-  type_enregistrement=$(dig +short "$sous_domaine.$domaine" | awk 'NR==1 {print $4}')
-  destination=$(dig +short "$sous_domaine.$domaine" | awk 'NR==1 {print $1}')
-  echo "The subdomain $subdomain is a $record_type record and points to $destination"
+function lookup_subdomain() {
+    dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
 }
-domaine="$1"
-sous_domaine="$2"
-
-if [ -n "$sous_domaine" ]; then
-  grxrdinfo "$domaine" "$sous_domaine"
-fi
-
-if [ -z "$sous_domaine" ]; then
-  grxrdinfo "$domaine" "www"
-  grxrdinfo "$domaine" "lb-01"
-  grxrdinfo "$domaine" "web-01"
-  grxrdinfo "$domaine" "web-02"
-fi
