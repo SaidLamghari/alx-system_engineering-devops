@@ -1,41 +1,45 @@
 #!/usr/bin/env bash
-# Autor : SAID LAMGHARI
+# Auto : SAID LAMGHARI
 
-# Fonction pour rechercher un sous-domaine
-function grxrdinfo() {
-    dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
+# Fonction pour afficher
+# les informations sur un sous-domaine
+print_domain_info() {
+    local domain="$1"
+    local subdomain="$2"
+    local result=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print}')
+    local record_type=$(echo "$result" | awk '{print $4}')
+    local destination=$(echo "$result" | awk '{print $5}')
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
-# Vérifier si le nombre d'arguments est correct
-if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-    echo "Usage: $0 domain [subdomain]"
-    exit 1
-fi
+# Fonction principale
+main() {
+    local domain="$1"
+    local subdomain="$2"
 
-# Récupérer le nom de domaine et le sous-domaine (facultatif)
-domain="$1"
-subdomain="${2:-}"
+    # Vérifier si le nom
+    # de domaine est fourni
+    if [ -z "$domain" ]; then
+        echo "Domain name missing."
+        exit 1
+    fi
 
-# Vérifier si le nom de domaine est vide
-if [ -z "$domain" ]; then
-    echo "Error: Domain name cannot be empty."
-    exit 1
-fi
+    # Liste des sous-domaines
+    local subdomains=("www" "lb-01" "web-01" "web-02")
 
-# Vérifier si le sous-domaine est vide
-if [ -n "$subdomain" ] && [ -z "$subdomain" ]; then
-    echo "Error: Subdomain cannot be empty."
-    exit 1
-fi
+    # Si un sous-domaine est fourni,
+    # afficher les informations pour ce sous-domaine
+    if [ -n "$subdomain" ]; then
+        print_domain_info "$domain" "$subdomain"
+    else
+        # Sinon, afficher les informations
+        # pour tous les sous-domaines
+        for sub in "${subdomains[@]}"; do
+            print_domain_info "$domain" "$sub"
+        done
+    fi
+}
 
-# Rechercher les informations sur le sous-domaine
-if [ -z "$subdomain" ]; then
-    # Rechercher les informations sur les sous-domaines www, lb-01, web-01 et web-02
-    grxrdinfo "$domain" www
-    grxrdinfo "$domain" lb-01
-    grxrdinfo "$domain" web-01
-    grxrdinfo "$domain" web-02
-else
-    # Rechercher les informations sur le sous-domaine spécifié
-    grxrdinfo "$domain" "$subdomain"
-fi
+# Appeler la fonction principale
+# avec les arguments fournis
+main "$@"
