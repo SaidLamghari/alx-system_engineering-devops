@@ -3,7 +3,7 @@
 
 # Fonction pour afficher
 # les informations sur un sous-domaine
-print_domain_info() {
+prdinfo() {
     local domain="$1"
     local subdomain="$2"
     local result=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print}')
@@ -30,12 +30,12 @@ main() {
     # Si un sous-domaine est fourni,
     # afficher les informations pour ce sous-domaine
     if [ -n "$subdomain" ]; then
-        print_domain_info "$domain" "$subdomain"
+        prdinfo "$domain" "$subdomain"
     else
         # Sinon, afficher les informations
         # pour tous les sous-domaines
         for sub in "${subdomains[@]}"; do
-            print_domain_info "$domain" "$sub"
+            prdinfo "$domain" "$sub"
         done
     fi
 }
