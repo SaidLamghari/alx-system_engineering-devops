@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # Autor : SAID LAMGHARI
 
+# Fonction pour rechercher un sous-domaine
+function grxrdinfo() {
+    dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
+}
+
 # Vérifier si le nombre d'arguments est correct
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     echo "Usage: $0 domain [subdomain]"
@@ -26,11 +31,11 @@ fi
 # Rechercher les informations sur le sous-domaine
 if [ -z "$subdomain" ]; then
     # Rechercher les informations sur les sous-domaines www, lb-01, web-01 et web-02
-    dig www."$domain" +short | awk 'BEGIN { FS = " " } { print "The subdomain www is a " $3 " record and points to " $4 }'
-    dig lb-01."$domain" +short | awk 'BEGIN { FS = " " } { print "The subdomain lb-01 is a " $3 " record and points to " $4 }'
-    dig web-01."$domain" +short | awk 'BEGIN { FS = " " } { print "The subdomain web-01 is a " $3 " record and points to " $4 }'
-    dig web-02."$domain" +short | awk 'BEGIN { FS = " " } { print "The subdomain web-02 is a " $3 " record and points to " $4 }'
+    grxrdinfo "$domain" www
+    grxrdinfo "$domain" lb-01
+    grxrdinfo "$domain" web-01
+    grxrdinfo "$domain" web-02
 else
     # Rechercher les informations sur le sous-domaine spécifié
-    dig "$subdomain"."$domain" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
+    grxrdinfo "$domain" "$subdomain"
 fi
