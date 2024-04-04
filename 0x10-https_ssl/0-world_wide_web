@@ -1,33 +1,20 @@
 #!/usr/bin/env bash
 
-# Autor : SAID LAMGHARI
-
-# grxrdinfo : Récupère les informations sur les enregistrements DNS d'un domaine et sous-domaine donnés.
-# Paramètres :
-#   $1 : Le nom de domaine.
-#   $2 : Le sous-domaine (facultatif).
 grxrdinfo() {
   domaine="$1"
   sous_domaine="$2"
 
-  # Effectue une recherche DNS pour le sous-domaine et récupère le type d'enregistrement et la destination.
   type_enregistrement=$(dig +short "$sous_domaine.$domaine" | awk 'NR==1 {print $4}')
   destination=$(dig +short "$sous_domaine.$domaine" | awk 'NR==1 {print $1}')
-
-  # Affiche les informations sur le sous-domaine.
   echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
-
-# Récupère les arguments en ligne de commande.
 domaine="$1"
 sous_domaine="$2"
 
-# Si un sous-domaine est spécifié, récupère ses informations d'enregistrement.
 if [ -n "$sous_domaine" ]; then
   grxrdinfo "$domaine" "$sous_domaine"
 fi
 
-# Si aucun sous-domaine n'est spécifié, récupère les informations d'enregistrement pour des sous-domaines prédéfinis.
 if [ -z "$sous_domaine" ]; then
   grxrdinfo "$domaine" "www"
   grxrdinfo "$domaine" "lb-01"
