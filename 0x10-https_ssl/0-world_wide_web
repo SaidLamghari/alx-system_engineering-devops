@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Autor : SAID LAMGHARI
 
+#!/bin/bash
+
 # Fonction pour rechercher un sous-domaine
 function lookup_subdomain() {
     dig "$1.$2" +short | awk 'BEGIN { FS = " " } { print "The subdomain " $1 " is a " $3 " record and points to " $4 }'
