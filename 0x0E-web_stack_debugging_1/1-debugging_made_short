@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Autor: Said LAMGHARI
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
