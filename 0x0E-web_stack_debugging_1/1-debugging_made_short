@@ -2,6 +2,6 @@
 
 apt-get update
 apt-get install -y nginx
-sed -i 's/^\s*listen\s*\(.*\)\s*default_server.*$/listen 80 default_server;/g' /etc/nginx/sites-available/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 nginx -s stop
 nginx
