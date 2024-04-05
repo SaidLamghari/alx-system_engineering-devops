@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Auto: Said LAMGHARI
+
+# Installer Nginx s'il n'est pas déjà installé
+apt-get update
+apt-get install -y nginx
+
+# Arrêter Nginx s'il est déjà en cours d'exécution
+service nginx stop
+
+# Vérifier s'il y a déjà un processus qui écoute sur le port 80
+if netstat -tuln | grep -q ':80 '; then
+    echo "Quelque chose écoute déjà sur le port 80, veuillez résoudre les conflits manuellement."
+    exit 1
+fi
+
+# Configurer Nginx pour écouter sur le port 80
+sed -i 's/^\s*listen\s*\(.*\)\s*default_server.*$/listen 80 default_server;/g' /etc/nginx/sites-available/default
+
+# Redémarrer Nginx pour appliquer les modifications
+service nginx restart
