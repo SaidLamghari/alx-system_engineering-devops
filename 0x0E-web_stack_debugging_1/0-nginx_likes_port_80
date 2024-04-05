@@ -10,8 +10,8 @@ service nginx stop
 
 # Vérifier s'il y a déjà un processus qui écoute sur le port 80
 if netstat -tuln | grep -q ':80 '; then
-	    echo "Quelque chose écoute déjà sur le port 80, veuillez résoudre les conflits manuellement."
-	        exit 1
+		    echo "Quelque chose écoute déjà sur le port 80, veuillez résoudre les conflits manuellement."
+		    	        exit 1
 fi
 
 # Supprimer le bloc serveur par défaut s'il existe
