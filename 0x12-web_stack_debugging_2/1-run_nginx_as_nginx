@@ -2,22 +2,19 @@
 # Fix this container so that Nginx
 # is running as the nginx user.
 # Autor: Said LAMGHARI
-
-# Run Nginx as nginx user and listen on port 8080
-
-chown -R nginx /etc/nginx
-chmod 770 /etc/nginx/nginx.conf
-# Update Nginx user in nginx.conf
-sed -i "s/#user www-data;/user nginx;/" /etc/nginx/nginx.conf
-
-# Update Nginx port in default site configuration
-sed -i "s/listen 80;/listen 8080;/" /etc/nginx/sites-available/default
-
-# Set correct permissions for the Nginx configuration file
-chmod 644 /etc/nginx/nginx.conf
+# Fix this container so that Nginx is running as user nginx
 
 # Stop Apache2 if running
 systemctl stop apache2
 
-# Start Nginx service as the nginx user
-systemctl start nginx
+# Change ownership of /etc/nginx directory to nginx user
+chown -R nginx:nginx /etc/nginx
+
+# Change permissions of nginx.conf
+chmod 644 /etc/nginx/nginx.conf
+
+# Update Nginx port in default site configuration
+sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
+
+# Restart Nginx service as the nginx user
+systemctl restart nginx
