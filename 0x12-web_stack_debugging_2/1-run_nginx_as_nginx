@@ -5,11 +5,13 @@
 
 # Run Nginx as nginx user and listen on port 8080
 
+chown -R nginx /etc/nginx
+chmod 770 /etc/nginx/nginx.conf
 # Update Nginx user in nginx.conf
-sed -i 's/#user\s\+www-data;/user nginx;/' /etc/nginx/nginx.conf
+sed -i "s/#user www-data;/user nginx;/" /etc/nginx/nginx.conf
 
 # Update Nginx port in default site configuration
-sed -i 's/listen\s\+80;/listen 8080;/' /etc/nginx/sites-available/default
+sed -i "s/listen 80;/listen 8080;/" /etc/nginx/sites-available/default
 
 # Set correct permissions for the Nginx configuration file
 chmod 644 /etc/nginx/nginx.conf
@@ -18,4 +20,4 @@ chmod 644 /etc/nginx/nginx.conf
 systemctl stop apache2
 
 # Start Nginx service as the nginx user
-sudo -u nginx systemctl start nginx
+systemctl start nginx
