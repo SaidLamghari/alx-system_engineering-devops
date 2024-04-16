@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Fix this container so that Nginx
+# is running as the nginx user.
+# Autor: Said LAMGHARI
+chown -R nginx:nginx /etc/nginx && chmod -R 770 /etc/nginx
+# Replace all occurrences of "80" with "8080" in /etc/nginx/sites-available/default
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+# Terminate any running Apache2 processes
+pkill apache2
+# Restart the nginx service with the nginx user
+sudo -u nginx service nginx restart
