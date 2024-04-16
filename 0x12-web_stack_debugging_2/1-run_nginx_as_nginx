@@ -3,18 +3,12 @@
 # is running as the nginx user.
 # Autor: Said LAMGHARI
 # Fix this container so that Nginx is running as user nginx
+# Change ownership and permissions of /etc/nginx recursively
+chown -R nginx:nginx /etc/nginx && chmod -R 770 /etc/nginx
+# Replace all occurrences of "80" with "8080" in /etc/nginx/sites-available/default
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+# Terminate any running Apache2 processes
+pkill apache2
+# Restart the nginx service with the nginx user
+sudo -u nginx service nginx restart
 
-# Stop Apache2 if running
-systemctl stop apache2
-
-# Change ownership of /etc/nginx directory to nginx user
-chown -R nginx:nginx /etc/nginx
-
-# Change permissions of nginx.conf
-chmod 644 /etc/nginx/nginx.conf
-
-# Update Nginx port in default site configuration
-sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
-
-# Restart Nginx service as the nginx user
-systemctl restart nginx
