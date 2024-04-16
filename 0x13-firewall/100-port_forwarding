@@ -1,0 +1,8 @@
+# Add the following lines within the *nat section to set up port forwarding from 8080/TCP to 80/TCP:
+# Autor: Said LAMGHARI
+
+# sudo nano /etc/ufw/before.rules
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
