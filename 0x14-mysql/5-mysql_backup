@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# backup of a MySQL database
+# Autor : Said LAMGHARI
+
+# Get the date
+current_date=$(date +"%d-%m-%Y")
+
+# MySQL dump filename
+dump_file="backup.sql"
+
+# MySQL password
+password="$1"
+
+# Directory store the backup
+backup_dir="/path/to/backup/directory"
+
+# Createbackup directory if it doesn't exist
+mkdir -p "$backup_dir"
+
+# Generate the MySQL dump
+mysqldump -u root -p"$password" --all-databases > "$backup_dir/$dump_file"
+
+# Compress the dumpfile into a tar.gzarchive
+tar -czvf "$backup_dir/$current_date.tar.gz" -C "$backup_dir" "$dump_file"
+
+# Remove
+rm "$backup_dir/$dump_file"
