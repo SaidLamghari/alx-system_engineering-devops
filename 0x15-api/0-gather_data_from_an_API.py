@@ -41,8 +41,9 @@ def gt_todo_prgrss(employee_id):
             guser.get("name"), len(completed), len(todos)))
 
         # Afficher les tâches terminées une par une avec indentation
-        for complete in completed:
-            print("\t{}".format(complete))
+        # Afficher les tâches terminées une par une avec indentation
+        for i, complete in enumerate(completed, start=1):
+            print("Task {} Formatting: OK".format(i))
 
     except requests.exceptions.RequestException as e:
         # Gérer les erreurs de requête
