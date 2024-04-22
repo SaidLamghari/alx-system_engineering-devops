@@ -3,7 +3,7 @@
 Un script Python qui, en utilisant une API REST donnée,
 récupère des informations sur
 l'avancement de la liste de tâches d'un employé.
-Autor: Said LAMGHARI
+Auteur: Said LAMGHARI
 """
 
 import requests
@@ -38,11 +38,14 @@ def get_todo_list_progress(employee_id):
 
         # Calculer l'avancement
         total_tsks = len(todo_dt)
-        completed_tsks = [task['title'] for task in todo_dt if task['completed']]
+        completed_tsks = [
+                task['title'] for task in todo_dt if task['completed']
+                ]
         num_completed_tsks = len(completed_tsks)
 
         # Afficher les informations sur l'avancement
-        print(f"L'employé {user_name} a terminé des tâches ({num_completed_tsks}/{total_tsks}):")
+        print(f"L'employé {user_name} a terminé des tâches "
+              f"({num_completed_tsks}/{total_tsks}):")
         for task in completed_tsks:
             print(f"\t{task}")
 
