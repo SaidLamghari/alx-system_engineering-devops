@@ -1,37 +1,42 @@
 #!/usr/bin/python3
-"""Exports to-do list information for a given employee ID to CSV format."""
+"""
+Un script Python qui, en utilisant une API REST donnée,
+récupère des informations sur
+l'avancement de la liste de tâches d'un employé
+les exporte au format CSV.
+Autor: Said LAMGHARI
+"""
 
 import csv
 import requests
 import sys
 
-def get_todos(user_id):
-    todos_url = "https://jsonplaceholder.typicode.com/todos"
-    response = requests.get(todos_url, params={"userId": user_id})
-    todos = response.json()
-    return todos
-
-def get_username(user_id):
-    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
-    response = requests.get(user_url)
-    user = response.json()
-    return user["username"]
-
-def export_to_csv(user_id, username, todos):
-    filename = "{}.csv".format(user_id)
-    with open(filename, "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        for todo in todos:
-            writer.writerow([username, todo["completed"], todo["title"]])
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: {} <user_id>".format(sys.argv[0]))
+        print("Usage: python script.py <employee_id>")
         sys.exit(1)
 
-    user_id = sys.argv[1]
+    # URL de base pour l'API JSONPlaceholder
+    base_url = "https://jsonplaceholder.typicode.com/"
 
-    todos = get_todos(user_id)
-    username = get_username(user_id)
+    # Obtenir les informations sur
+    # l'employé en utilisant l'ID d'employé fourni
+    id_employe = sys.argv[1]
+    infs_emply = requests.get(base_url + "users/{}".format(id_employe)).json()
 
-    export_to_csv(user_id, username, todos)
+    # Obtenir la liste de tâches à faire
+    # pour l'employé en utilisant l'ID d'employé fourni
+    todo_prms = {"userId": id_employe}
+    todo_lst = requests.get(base_url + "todos", todo_prms).json()
+
+    # Ouvrir un fichier CSV pour écrire les données
+    with open("{}.csv".format(id_employe), "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        # Écrire chaque tâche dans le fichier CSV
+        for tsk in todo_lst:
+            writer.writerow([
+                id_employe,
+                infs_emply.get("username"),
+                str(tsk.get("completed")),
+                tsk.get("title")
+            ])
