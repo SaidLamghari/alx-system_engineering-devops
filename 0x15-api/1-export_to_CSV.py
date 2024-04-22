@@ -21,9 +21,8 @@ def export_to_csv(user_id, username, todos):
     filename = "{}.csv".format(user_id)
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])  # En-têtes sans USER_ID
         for todo in todos:
-            writer.writerow([username, todo["completed"], todo["title"]])  # Pas de USER_ID ici
+            writer.writerow([username, todo["completed"], todo["title"]])
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
