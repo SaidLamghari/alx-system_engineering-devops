@@ -11,50 +11,41 @@ import csv
 import requests
 import sys
 
-def fetch_employee_data(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com/"
-
-    # Obtenir les informations sur l'employé en utilisant l'ID d'employé fourni
-    response = requests.get(base_url + "users/{}".format(employee_id))
-    if response.status_code != 200:
-        raise Exception("Impossible de récupérer les informations sur l'employé.")
-    
-    employee_info = response.json()
-
-    # Obtenir la liste de tâches à faire pour l'employé en utilisant l'ID d'employé fourni
-    todo_params = {"userId": employee_id}
-    response = requests.get(base_url + "todos", params=todo_params)
-    if response.status_code != 200:
-        raise Exception("Impossible de récupérer la liste des tâches de l'employé.")
-    
-    todo_list = response.json()
-
-    return employee_info, todo_list
-
-def write_to_csv(employee_id, employee_info, todo_list):
-    with open("employee_{}.csv".format(employee_id), "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-
-        for task in todo_list:
-            writer.writerow([
-                employee_id,
-                employee_info.get("username"),
-                str(task.get("completed")),
-                task.get("title")
-            ])
-
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-        sys.exit(1)
+    # Récupérer l'ID de l'utilisateur à partir
+    # des arguments de la ligne de commande
+    user_id = sys.argv[1]
 
-    try:
-        employee_id = int(sys.argv[1])
-        employee_info, todo_list = fetch_employee_data(employee_id)
-        write_to_csv(employee_id, employee_info, todo_list)
-        print("Les données ont été exportées avec succès.")
-    except ValueError:
-        print("L'ID de l'employé doit être un entier.")
-    except Exception as e:
-        print("Une erreur s'est produite:", str(e))
+    # Définir l'URL de base pour l'API JSON
+    lnk = "https://jsonplaceholder.typicode.com/"
+
+    # Récupérer les informations sur l'utilisateur depuis
+    # l'API et convertir la réponse en objet JSON
+    usr = requests.get(lnk + "users/{}".format(user_id)).json()
+
+    # Extraire le nom d'utilisateur des données utilisateur
+    usernme = usr.get("username")
+
+    # Récupérer les éléments de la liste
+    # de tâches associés à l'ID d'utilisateur
+    # donné et convertir la réponse en objet JSON
+    todos_in = requests.get(lnk + "todos", params={"userId": user_id}).json()
+
+    # Écrire les éléments de la liste de tâches dans un fichier CSV
+    with open("{}.csv".format(user_id), "w", newline="") as csv_file:
+        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+
+        # Écrire l'en-tête CSV
+        writer.writerow(
+                ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+                )
+
+        # Écrire chaque élément de la liste de tâches
+        # en tant que ligne dans le fichier CSV
+        for todo in todos_in:
+            # Convertir le statut de complétion en
+            # une représentation de chaîne (True ou False)
+            cmptd_sts = str(todo.get("completed"))
+            # Écrire les détails de chaque tâche en
+            # tant que ligne dans le fichier CSV
+            writer.writerow([user_id, usernme, cmptd_sts, todo.get("title")])
