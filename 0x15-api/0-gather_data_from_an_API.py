@@ -3,51 +3,46 @@
 Un script Python qui, en utilisant une API REST donnée,
 récupère des informations sur
 l'avancement de la liste de tâches d'un employé.
-Auteur: Said LAMGHARI
+Autor: Said LAMGHARI
 """
 
 import requests
 import sys
 
 
-def get_todo_list_progress(employee_id):
+def gt_todo_prgrss(employee_id):
     """
-    Récupère et affiche des informations
+    Récupère et affiche les informations
     sur l'avancement de la liste
     de tâches d'un employé.
 
-    Args:
-        employee_id (int): L'ID de l'employé.
+    Args: employee_id (int): L'ID de l'employé.
 
-    Returns:
-        None
+    Returns: None
     """
-    base_lnk = 'https://jsonplaceholder.typicode.com'
-    user_lnk = f'{base_lnk}/users/{employee_id}'
-    todo_lnk = f'{base_lnk}/todos?userId={employee_id}'
+    # URL de base pour l'API JSONPlaceholder
+    base_lnk = "https://jsonplaceholder.typicode.com/"
 
     try:
-        # Récupérer les informations sur l'utilisateur
-        user_rspns = requests.get(user_lnk)
-        user_dt = user_rspns.json()
-        user_name = user_dt['name']
+        # Obtenir les informations sur l'employé
+        # en utilisant l'ID d'employé fourni
+        guser = requests.get(base_lnk + "users/{}".format(employee_id)).json()
 
-        # Récupérer la liste de tâches de l'employé
-        todo_rspns = requests.get(todo_lnk)
-        todo_dt = todo_rspns.json()
+        # Obtenir la liste de tâches de
+        # l'employé en utilisant l'ID d'employé fourni
+        params = {"userId": employee_id}
+        todos = requests.get(base_lnk + "todos", params=params).json()
 
-        # Calculer l'avancement
-        total_tsks = len(todo_dt)
-        completed_tsks = [
-                task['title'] for task in todo_dt if task['completed']
-                ]
-        num_completed_tsks = len(completed_tsks)
+        # Filtrer les tâches terminées et les compter
+        completed = [t.get("title") for t in todos if t.get("completed")]
 
-        # Afficher les informations sur l'avancement
-        print(f"L'employé {user_name} a terminé des tâches "
-              f"({num_completed_tsks}/{total_tsks}):")
-        for task in completed_tsks:
-            print(f"\t{task}")
+        # Afficher le nom de l'employé et le nombre de tâches terminées
+        print("Employee {} is done with tasks({}/{}):".format(
+            guser.get("name"), len(completed), len(todos)))
+
+        # Afficher les tâches terminées une par une avec indentation
+        for complete in completed:
+            print("\t{}".format(complete))
 
     except requests.exceptions.RequestException as e:
         # Gérer les erreurs de requête
@@ -57,14 +52,12 @@ def get_todo_list_progress(employee_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        # Valider les arguments en ligne de commande
-        print("Utilisation : python3 gather_data_from_an_API.py <employee_id>")
+        print("Utilisation : python3 nom_du_script.py <id_employé>")
         sys.exit(1)
 
     employee_id = sys.argv[1]
     if not employee_id.isdigit():
-        # Valider l'ID de l'employé
         print("Erreur : L'ID de l'employé doit être un entier.")
         sys.exit(1)
 
-    get_todo_list_progress(int(employee_id))
+    gt_todo_prgrss(int(employee_id))
