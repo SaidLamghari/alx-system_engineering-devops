@@ -26,10 +26,6 @@ def number_of_subscribers(subreddit):
     # Définir un en-tête User-Agent personnalisé
     # pour éviter les problèmes potentiels avec l'API Reddit
     # hadrs = {'User-Agent': 'Mozilla/5.0'}
-    hadrs = {
-            # Set the User-Agent to identify the request
-            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-            }
 
     # Envoyer une requête GET à l'API
     rspnse = requests.get(lnk, headers=hadrs)
