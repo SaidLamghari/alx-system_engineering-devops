@@ -25,21 +25,19 @@ def number_of_subscribers(subreddit):
 
     # Définir un en-tête User-Agent personnalisé
     # pour éviter les problèmes potentiels avec l'API Reddit
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    hadrs = {'User-Agent': 'Mozilla/5.0'}
 
     # Envoyer une requête GET à l'API
-    response = requests.get(lnk, headers=headers)
+    rspnse = requests.get(lnk, headers=hadrs)
 
     # Vérifier si la réponse est réussie (code d'état 200)
-    if response.status_code == 200:
+    if rspnse.status_code == 200:
         # Analyser la réponse au format JSON
-        data = response.json()
+        dt = rspnse.json()
 
-        # Vérifier si la structure de données attendue existe dans la réponse
-        if 'data' in data and 'subscribers' in data['data']:
-            # Récupérer le nombre d'abonnés depuis la réponse
-            subscribers = data['data']['subscribers']
-            return subscribers
+        # Récupérer le nombre d'abonnés depuis la réponse
+        sbscrbrs = dt['data']['subscribers']
+        return sbscrbrs
 
     # Retourner 0 si le subreddit est invalide
     # ou si la réponse de l'API est inattendue
