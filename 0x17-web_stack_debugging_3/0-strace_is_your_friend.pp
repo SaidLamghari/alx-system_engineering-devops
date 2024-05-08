@@ -7,8 +7,7 @@
 # Ressource pour corriger le problème
 # en remplaçant 'phpp' par 'php' dans wp-settings.php
 
-file { '/var/www/html/wp-settings.php':
-  ensure  => file,
-  content => inline_template('<%= File.read("/var/www/html/wp-settings.php").gsub("phpp", "php") %>'),
-  notify  => Service['apache2'],
+exec { 'fix_apache_error_Using_strace':
+  command => "sed -i 's/phpp/php/g' /var/www/html/wp-settings.php",
+  path    => '/bin',
 }
