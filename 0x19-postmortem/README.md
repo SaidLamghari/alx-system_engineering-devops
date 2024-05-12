@@ -1,11 +1,15 @@
 ## Postmortem: Sandbox Connection Issue on September 28-29, 2023
 
 
+
+
 ### Issue Summary:
 
    * Duration: September 28th to September 29th, 2023.
    * Impact: Inability to connect to the Sandbox environment, hindering productivity and causing stress due to impending task deadlines.
    * Root Cause: Lack of understanding of the system architecture and configuration settings leading to prolonged troubleshooting.
+
+
 
 
 ### Timeline:
@@ -18,10 +22,14 @@
     * September 29th (Evening): Stress and frustration alleviated after resolving the issue, but concerns remained about completing tasks within deadlines.
 
 
+
+
 ### Root Cause and Resolution:
 
     * Root Cause: The root cause was identified as a lack of understanding of the system architecture and configuration settings required to connect to the Sandbox environment.
     * Resolution: The issue was resolved through extensive research, documentation review, and collaboration with colleagues to gain insights into the correct configuration settings.
+
+
 
 
 ### Corrective and Preventative Measures:
@@ -33,6 +41,8 @@
         Schedule dedicated training sessions to educate team members on system configurations and troubleshooting techniques.
         Document the steps taken to resolve the connection issue for future reference.
         Implement regular knowledge-sharing sessions to exchange insights and best practices among team members.
+
+
 
 
 ### Conclusion:
