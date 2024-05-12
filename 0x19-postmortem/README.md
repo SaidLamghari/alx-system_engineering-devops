@@ -49,5 +49,8 @@
 
 The Sandbox connection issue experienced on September 28-29, 2023, was ultimately attributed to a lack of familiarity with the system architecture and configuration settings. Despite the challenges and stress encountered during the troubleshooting process, the issue was successfully resolved through perseverance, collaboration, and knowledge acquisition. Moving forward, we will prioritize improving training and documentation to empower team members with the necessary skills and knowledge to navigate similar challenges effectively, ensuring smoother operations and timely task completion.
 
-![Sandbox Connection Issue](https://github.com/SaidLamghari/alx-system_engineering-devops/blob/master/0x19-postmortem/postmortem.png)
+
+<p align="center">
+  <img src="https://github.com/SaidLamghari/alx-system_engineering-devops/blob/master/0x19-postmortem/postmortem.png" alt="Sandbox Connection Issue">
+</p>
 
