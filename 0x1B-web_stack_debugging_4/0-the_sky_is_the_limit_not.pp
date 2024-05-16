@@ -1,8 +1,10 @@
-# Puppet manifeste pour corriger la configuration de Nginx afin d'avoir zéro requête échouée
+# Puppet manifeste pour corriger la configuration
+# de Nginx afin d'avoir zéro requête échouée
 # Auteur : SAID LAMGHARI
 
-# Puppet manifest pour modifier le paramètre de limite maximale de fichiers ouverts
-exec {'modify_max_open_files_limit':
+# Puppet manifest pour modifier le paramètre
+# de limite maximale de fichiers ouverts
+exec {'modify_mx_opn_fles_limit':
   # Modifie la limite maximale de fichiers ouverts
   command => 'sed -i "s/15/10000/" /etc/default/nginx',
   # Commande pour modifier le fichier de configuration de Nginx
@@ -11,7 +13,7 @@ exec {'modify_max_open_files_limit':
 }
 
 # Redémarre le service Nginx
-exec {'restart_nginx_service':
+exec {'rstart_nginx_srvice':
   # Commande pour redémarrer le service Nginx
   command => 'sudo service nginx restart',
   # Chemin d'accès aux exécutables requis
