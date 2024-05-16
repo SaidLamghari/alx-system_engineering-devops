@@ -5,10 +5,10 @@
 
 # Ouvrir un fichier sans message d'erreur.
 
-exec {'change OS_security_config':
+exec {'change OS_sec_config':
   # Modification de la configuration de
   # sécurité du système d'exploitation
-  command => 'echo "holberton hard nofile 4096" >> /etc/security/limits.conf',
+  command => "sed -i 's/holberton/foo/' /etc/security/limits.conf",
   # Commande pour ajouter une ligne spécifiant
   # la limite du nombre maximal
   # de fichiers ouverts pour l'utilisateur
