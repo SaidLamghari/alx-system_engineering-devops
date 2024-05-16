@@ -5,26 +5,14 @@
 
 # Ouvrir un fichier sans message d'erreur.
 
-file { '/etc/security/limits.conf':
-  # Chemin du fichier de configuration à modifier
-  ensure  => present,
-  # Assure que le fichier existe
-
-  content => template('your_module/limits.conf.erb'),
-  # Contenu du fichier basé sur un modèle,
-  # où 'your_module/limits.conf.erb' est le chemin vers le fichier modèle
-
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  # Propriétaire, groupe et permissions du fichier
+exec {'change OS_security_config':
+  # Modification de la configuration de
+  # sécurité du système d'exploitation
+  command => 'echo "holberton hard nofile 4096" >> /etc/security/limits.conf',
+  # Commande pour ajouter une ligne spécifiant
+  # la limite du nombre maximal
+  # de fichiers ouverts pour l'utilisateur
+  # holberton dans le fichier limits.conf
+  path    => '/usr/bin/env/:/bin/:/usr/bin/:/usr/sbin/'
+  # Chemin d'accès aux exécutables requis par la commande
 }
-
-exec { 'reload_limits_conf':
-  # Exécuter la commande pour recharger la configuration des limites
-  command     => 'sysctl -p',
-  # La commande pour recharger la configuration
-  refreshonly => true,
-  # Ne s'exécute que si une notification est reçue
-}
-
