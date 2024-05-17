@@ -1,6 +1,8 @@
 # Autor: SAID LAMGHARI
-# 4. Let's do this for your API
+# 4. Let's do this
+# for your API
 
+	
 	location /api/ {
 		proxy_pass http://0.0.0.0:5002;
 	}

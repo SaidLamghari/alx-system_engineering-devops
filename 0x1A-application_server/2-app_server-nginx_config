@@ -1,9 +1,9 @@
 sudo vi /etc/nginx/sites-available/default
 **************************************
+# Autor SAID LAMGHARI
 ##
 # You should look at the following URL's in order to grasp a solid understanding
 # of Nginx configuration files in order to fully unleash the power of Nginx.
-# https://www.nginx.com/resources/wiki/start/
 # https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
 # https://wiki.debian.org/Nginx/DirectoryStructure
 #
@@ -15,7 +15,6 @@ sudo vi /etc/nginx/sites-available/default
 # applications, such as Drupal or Wordpress. These applications will be made
 # available underneath a path with that package name, such as /drupal8.
 #
-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
 ##
 
 # Default server configuration
@@ -66,8 +65,6 @@ server {
         #       include snippets/fastcgi-php.conf;
         #
         #       # With php-fpm (or other unix sockets):
-        #       fastcgi_pass 127.0.0.1:9000;
-        #}
 
         # deny access to .htaccess files, if Apache's document root
         # concurs with nginx's one
@@ -96,3 +93,4 @@ server {
 #               try_files $uri $uri/ =404;
 #       }
 #}
+# ici

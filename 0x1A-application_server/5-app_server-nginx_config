@@ -1,5 +1,6 @@
 # Autor : SAID LAMGHARI
 # TASK 5
+# let do it
 
 	location / {
                 proxy_pass http://127.0.0.1:5003/2-hbnb;

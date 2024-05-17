@@ -1,7 +1,9 @@
 # autor Said LAMGHARI
 # on doit ajouter:    
-# Configuration de la redirection de proxy pour /airbnb-dynamic/number_odd_or_even/
+# Configuration de la redirection de proxy
+# pour /airbnb-dynamic/number_odd_or_even/
     location /airbnb-dynamic/number_odd_or_even/ {
-        # Redirige les requêtes vers l'application Flask sur localhost:5001
+        # Redirige les requêtes vers l'application
+        # Flask sur localhost:5001
         proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
     }
